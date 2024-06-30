@@ -4,7 +4,8 @@
   "info": {
     "singularName": "client",
     "pluralName": "clients",
-    "displayName": "client"
+    "displayName": "client",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +17,9 @@
     },
     "phone_number": {
       "type": "biginteger"
+    },
+    "URL": {
+      "type": "text"
     }
   }
 }
