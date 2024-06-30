@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notices",
+  "info": {
+    "singularName": "notice",
+    "pluralName": "notices",
+    "displayName": "news & event",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "news_title": {
+      "type": "string"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "venue": {
+      "type": "string"
+    }
+  }
+}
