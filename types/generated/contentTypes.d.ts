@@ -800,9 +800,12 @@ export interface ApiClientClient extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    client_name: Attribute.String;
-    phone_number: Attribute.BigInteger;
+    client_name: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Client company name'>;
     URL: Attribute.Text;
+    client_logo: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -821,12 +824,45 @@ export interface ApiClientClient extends Schema.CollectionType {
   };
 }
 
+export interface ApiPartnerPartner extends Schema.CollectionType {
+  collectionName: 'partners';
+  info: {
+    singularName: 'partner';
+    pluralName: 'partners';
+    displayName: 'partner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    partner_name: Attribute.String & Attribute.Required;
+    URL: Attribute.String;
+    partner_logo: Attribute.Media<'images'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
     singularName: 'product';
     pluralName: 'products';
     displayName: 'product';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -834,6 +870,11 @@ export interface ApiProductProduct extends Schema.CollectionType {
   attributes: {
     prod_name: Attribute.String;
     img: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    rating: Attribute.Decimal;
+    description: Attribute.RichText;
+    inStock: Attribute.Boolean & Attribute.DefaultTo<true>;
+    pack_size: Attribute.String;
+    categories: Attribute.Enumeration<['medicine', 'oil']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -871,6 +912,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::client.client': ApiClientClient;
+      'api::partner.partner': ApiPartnerPartner;
       'api::product.product': ApiProductProduct;
     }
   }

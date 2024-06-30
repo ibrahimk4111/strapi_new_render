@@ -13,13 +13,23 @@
   "pluginOptions": {},
   "attributes": {
     "client_name": {
-      "type": "string"
-    },
-    "phone_number": {
-      "type": "biginteger"
+      "type": "string",
+      "required": true,
+      "default": "Client company name"
     },
     "URL": {
       "type": "text"
+    },
+    "client_logo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }
